@@ -52,4 +52,56 @@ var lengthOfLongestSubstring2 = function (s) {
     console.log(longest)
     return longest.length
 }
-lengthOfLongestSubstring2('dvdf')
+var lengthOfLongestSubstring3 = function (s) {
+    let longest = 0;
+    let startIndex = 0;
+    let endIndex = 0;
+    const set = new Set();
+    const len = s.length;
+    while(startIndex<len&&endIndex<len){
+        const c = s.charAt(endIndex);
+        if(!set.has(c)){
+            set.add(c)
+            endIndex++
+            longest = Math.max(longest,endIndex-startIndex)
+        }else {
+            set.delete(c)
+            startIndex++
+        }
+    }
+    return longest
+}
+var lengthOfLongestSubstring4 = function (s) {
+    let longest = 0;
+    let startIndex = 0;
+    let endIndex = 0;
+    const set = new Set();
+    const len = s.length;
+    while(startIndex<len&&endIndex<len){
+        const c = s.charAt(endIndex);
+        if(!set.has(c)){
+            set.add(c)
+            endIndex++
+            longest = Math.max(longest,endIndex-startIndex)
+        }else {
+            set.delete(s.charAt(startIndex++))
+        }
+    }
+    return longest
+}
+var lengthOfLongestSubstring5 = function (s) {
+    let longest = 0;
+    let startIndex = 0;
+    const map  = new Map();
+    for(let endIndex = 0;endIndex<s.length;endIndex++) {
+        const c = s.charAt(endIndex);
+        if(map.has(c)){
+            startIndex = Math.max(map.get(c)+1,startIndex);
+        }
+        longest = Math.max(endIndex - startIndex +1,longest);
+        map.set(s.charAt(endIndex),endIndex);
+    }
+    return longest
+}
+lengthOfLongestSubstring5('s')
+
