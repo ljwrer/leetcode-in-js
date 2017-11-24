@@ -9,6 +9,7 @@ var threeSumClosest = function(nums, target) {
     let result
     const len = nums.length
     for(let i=0;i<len-2;i++){
+        if(i>0&&nums[i]===nums[i-1]) continue
         let start = i+1
         let end = len-1
         let temp
